@@ -21,11 +21,28 @@ function esc(s) {
 function paras(text) {
   return String(text || "").split(/\n\s*\n/).filter(Boolean).map(function (p) { return "<p>" + esc(p.trim()) + "</p>"; }).join("");
 }
+/* O conteúdo editado no painel é lido direto do repositório do site,
+   assim o que a Andréa salva aparece no site em poucos minutos, sem publicar de novo. */
+var REPO_RAW = "https://raw.githubusercontent.com/admcoachingmeirelles-cyber/andrea-meirelles-site/main";
+var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 function getJSON(url) {
-  return fetch(url, { cache: "no-cache" }).then(function (r) { return r.json(); });
+  return fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+}
+function getContent(path) {
+  if (LOCAL) return getJSON(path);
+  var minuto = Math.floor(Date.now() / 60000);
+  return getJSON(REPO_RAW + path + "?v=" + minuto).catch(function () { return getJSON(path); });
+}
+/* Fotos enviadas pelo painel ficam em /uploads no repositório */
+function media(v) {
+  if (typeof v === "string") return !LOCAL && v.indexOf("/uploads/") === 0 ? REPO_RAW + v : v;
+  if (Array.isArray(v)) return v.map(media);
+  if (v && typeof v === "object") { var o = {}; for (var k in v) o[k] = media(v[k]); return o; }
+  return v;
 }
 function loadData() {
-  return Promise.all([getJSON("/content/site.json"), getJSON("/content/imoveis.json")]).then(function (d) {
+  return Promise.all([getContent("/content/site.json"), getContent("/content/imoveis.json")]).then(function (d) {
+    d = media(d);
     var imoveis = (d[1] || []).filter(function (i) { return i && i.publicado !== false && i.id; });
     return { site: d[0], imoveis: imoveis };
   });
