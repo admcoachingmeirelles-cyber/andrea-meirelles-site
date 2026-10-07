@@ -1,0 +1,167 @@
+# Painel de edição do site (Pages CMS — app.pagescms.org)
+# A Andréa entra com a conta do GitHub, edita aqui e o site atualiza sozinho.
+
+media:
+  input: uploads
+  output: /uploads
+  rename: safe
+  extensions: [jpg, jpeg, png, webp, pdf]
+
+content:
+  - name: imoveis
+    label: Imóveis
+    type: file
+    path: content/imoveis.json
+    format: json
+    list: true
+    fields:
+      - name: titulo
+        label: Nome do imóvel
+        type: string
+        required: true
+      - name: id
+        label: Endereço da página (sem acento e sem espaço, ex. casa-centro-3-quartos)
+        type: string
+        required: true
+        pattern:
+          regex: "^[a-z0-9-]+$"
+          message: "Use só letras minúsculas sem acento, números e hífen"
+      - name: publicado
+        label: Mostrar no site
+        type: boolean
+        default: true
+      - name: destaque
+        label: Aparecer primeiro (destaque)
+        type: boolean
+      - name: subtitulo
+        label: Frase curta (aparece embaixo do nome)
+        type: string
+      - name: finalidade
+        label: Finalidade
+        type: select
+        options:
+          values: [Venda, Aluguel residencial, Aluguel comercial]
+      - name: tipo
+        label: Tipo
+        type: select
+        options:
+          values: [Lote, Terreno, Casa, Apartamento, Lançamento, Comercial, Chácara]
+      - name: status
+        label: Selo no card (ex. Pré-cadastro aberto, Novo, Vendido)
+        type: string
+      - name: cidade
+        label: Cidade
+        type: string
+      - name: bairro
+        label: Bairro ou condomínio
+        type: string
+      - name: preco
+        label: Preço (deixe vazio para mostrar "Consulte as condições")
+        type: string
+      - name: valor
+        label: Valor para o filtro, só números (ex. 150000 na venda, 1200 no aluguel). NÃO aparece no site; vazio = aparece em qualquer faixa
+        type: string
+      - name: area
+        label: Área (ex. 160 m²)
+        type: string
+      - name: quartos
+        label: Quartos
+        type: string
+      - name: banheiros
+        label: Banheiros
+        type: string
+      - name: vagas
+        label: Vagas de garagem
+        type: string
+      - name: capa
+        label: Foto da capa (aparece no card da página inicial)
+        type: image
+      - name: fotos
+        label: Fotos da galeria
+        type: image
+        list: true
+      - name: videos
+        label: Vídeos (cole o link do YouTube ou do Instagram)
+        type: string
+        list: true
+      - name: destaques
+        label: Destaques (um por linha)
+        type: string
+        list: true
+      - name: descricao
+        label: Descrição (deixe uma linha em branco entre os parágrafos)
+        type: text
+      - name: botao_extra_texto
+        label: Botão extra — texto (ex. Fazer meu pré-cadastro)
+        type: string
+      - name: botao_extra_link
+        label: Botão extra — link
+        type: string
+
+  - name: site
+    label: Textos e fotos do site
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: capa_foto
+        label: Foto grande da capa
+        type: image
+      - name: capa_regiao
+        label: Capa — linha pequena de cima
+        type: string
+      - name: capa_titulo
+        label: Capa — título (parte branca)
+        type: string
+      - name: capa_destaque
+        label: Capa — título (parte dourada)
+        type: string
+      - name: capa_texto
+        label: Capa — texto
+        type: text
+      - name: imoveis_titulo
+        label: Imóveis — título
+        type: string
+      - name: imoveis_texto
+        label: Imóveis — texto
+        type: text
+      - name: video_destaque
+        label: Vídeo em destaque na página inicial (link do YouTube ou Instagram; vazio esconde a seção)
+        type: string
+      - name: video_titulo
+        label: Vídeo — título
+        type: string
+      - name: video_texto
+        label: Vídeo — texto
+        type: string
+      - name: sobre_foto
+        label: Quem sou — foto principal
+        type: image
+      - name: sobre_foto_2
+        label: Quem sou — foto menor
+        type: image
+      - name: sobre_frase
+        label: Quem sou — frase em destaque
+        type: string
+      - name: sobre_texto
+        label: Quem sou — texto (linha em branco entre parágrafos)
+        type: text
+      - name: whatsapp
+        label: WhatsApp só com números (55 + DDD + número)
+        type: string
+      - name: whatsapp_exibicao
+        label: WhatsApp como aparece no site
+        type: string
+      - name: instagram
+        label: Instagram (sem @)
+        type: string
+      - name: creci
+        label: CRECI
+        type: string
+      - name: horario
+        label: Horário de atendimento
+        type: string
+      - name: cidades
+        label: Cidades atendidas
+        type: string
+        list: true

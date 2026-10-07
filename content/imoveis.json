@@ -1,0 +1,41 @@
+[
+  {
+    "id": "horto-ville-iii",
+    "publicado": true,
+    "destaque": true,
+    "titulo": "Horto Ville III",
+    "subtitulo": "Lotes de 160 m² para sair do aluguel",
+    "tipo": "Lote",
+    "finalidade": "Venda",
+    "status": "Pré-cadastro aberto",
+    "cidade": "Santo Antônio de Jesus",
+    "bairro": "",
+    "preco": "",
+    "valor": "",
+    "area": "160 m² (8 x 20 m)",
+    "quartos": "",
+    "banheiros": "",
+    "vagas": "",
+    "capa": "/uploads/horto-ville-iii-entrada.jpg",
+    "fotos": [
+      "/uploads/horto-ville-iii-entrada.jpg",
+      "/uploads/horto-ville-iii-arte.png"
+    ],
+    "videos": [],
+    "destaques": [
+      "Lotes de 8 x 20 m (160 m²)",
+      "95% dos lotes planos",
+      "Cerca de 450 lotes",
+      "Ruas largas com calçada",
+      "Energia elétrica",
+      "Rede de água",
+      "Rede de esgoto",
+      "Rede de águas pluviais",
+      "Quadra de esporte",
+      "Entrada + parcelamento em até 180 vezes direto com a construtora, sem banco"
+    ],
+    "descricao": "Depois do Horto Ville I e II, a mesma construtora lança o Horto Ville III, novo loteamento em Santo Antônio de Jesus.\n\nSão cerca de 450 lotes de 8 x 20 m (160 m²), com 95% dos lotes planos. O loteamento terá ruas largas com calçada, energia elétrica, rede de água, rede de esgoto, rede de águas pluviais e quadra de esporte.\n\nO pagamento é feito com entrada + parcelamento em até 180 vezes direto com a construtora, sem precisar de financiamento no banco.\n\nO pré-cadastro está aberto. Quem se cadastra recebe as informações antes da abertura das vendas.",
+    "botao_extra_texto": "Fazer meu pré-cadastro",
+    "botao_extra_link": "https://hortoville.netlify.app"
+  }
+]
