@@ -92,6 +92,7 @@ function renderChrome(site) {
           '<li><a href="/#servicos">Serviços</a></li>' +
           '<li><a href="/#sobre">Quem sou</a></li>' +
           '<li><a href="/ebook.html">E-book grátis</a></li>' +
+          '<li><a href="/ebook-mcmv.html">Guia MCMV 2026</a></li>' +
           '<li><a href="/#contato">Contato</a></li>' +
         '</ul>' +
         '<a class="btn" href="' + wa(site, "Olá, Andréa! Vim pelo site e quero agendar uma conversa.") + '" target="_blank" rel="noopener">' + ICON.wa + '<span>Agendar conversa</span></a>' +
@@ -107,7 +108,7 @@ function renderChrome(site) {
         '<div class="foot-grid">' +
           '<div><a class="logo" href="/">' + ICON.mark + '<span><strong>Andréa Meirelles</strong><small>Corretora Imobiliária</small></span></a>' +
           '<p>Do aluguel ao primeiro imóvel, com um caminho claro e sem complicação.</p></div>' +
-          '<div><h4>Navegação</h4><ul><li><a href="/#imoveis">Imóveis</a></li><li><a href="/#servicos">Serviços</a></li><li><a href="/#sobre">Quem sou</a></li><li><a href="/ebook.html">E-book grátis</a></li><li><a href="/#contato">Contato</a></li></ul></div>' +
+          '<div><h4>Navegação</h4><ul><li><a href="/#imoveis">Imóveis</a></li><li><a href="/#servicos">Serviços</a></li><li><a href="/#sobre">Quem sou</a></li><li><a href="/ebook.html">E-book grátis</a></li><li><a href="/ebook-mcmv.html">Guia MCMV 2026</a></li><li><a href="/#contato">Contato</a></li></ul></div>' +
           '<div><h4>Contato</h4><ul>' +
             '<li><a href="' + wa(site) + '" target="_blank" rel="noopener">WhatsApp ' + esc(site.whatsapp_exibicao) + '</a></li>' +
             '<li><a href="https://www.instagram.com/' + esc(site.instagram) + '/" target="_blank" rel="noopener">@' + esc(site.instagram) + '</a></li>' +
@@ -352,9 +353,11 @@ function renderImovel(d) {
 
 /* ---------- Página do e-book ---------- */
 var EBOOK_PDF = "/ebook/do-aluguel-ao-primeiro-imovel.pdf";
+var EBOOK_TITLE = "Do aluguel ao seu primeiro imóvel";
 var EBOOK_PAGE = "/ebook/";
 function renderEbook(d) {
-  var s = d.site;
+  var s = d.site, b = document.body.dataset;
+  var pdf = b.ebookPdf || EBOOK_PDF, pagina = b.ebookPage || EBOOK_PAGE, titulo = b.ebookTitle || EBOOK_TITLE;
   var id = new URLSearchParams(location.search).get("imovel");
   var im = d.imoveis.filter(function (x) { return x.id === id; })[0];
   var form = document.getElementById("ebook-form"), done = document.getElementById("ebook-done");
@@ -364,13 +367,13 @@ function renderEbook(d) {
     var nome = form.nome.value.trim(), zap = form.whatsapp.value.trim();
     if (!nome) { form.nome.focus(); return; }
     if (zap.replace(/\D/g, "").length < 10) { form.whatsapp.focus(); form.whatsapp.setCustomValidity("Coloque o WhatsApp com DDD"); form.whatsapp.reportValidity(); return; }
-    var t = "Olá, Andréa! Sou " + nome + " (" + zap + "). Baixei o e-book \"Do aluguel ao seu primeiro imóvel\"" + (im ? " e quero receber as informações do " + im.titulo : "") + ".\n\n📘 Meu e-book: " + absUrl(EBOOK_PAGE);
+    var t = "Olá, Andréa! Sou " + nome + " (" + zap + "). Baixei o e-book \"" + titulo + "\"" + (im ? " e quero receber as informações do " + im.titulo : "") + ".\n\n📘 Meu e-book: " + absUrl(pagina);
     window.open(wa(s, t), "_blank", "noopener");
     var a = document.createElement("a");
-    a.href = EBOOK_PDF; a.download = "Do aluguel ao seu primeiro imóvel - Andréa Meirelles.pdf";
+    a.href = pdf; a.download = titulo + " - Andréa Meirelles.pdf";
     document.body.appendChild(a); a.click(); a.remove();
     form.hidden = true; done.hidden = false;
-    document.getElementById("ebook-again").href = EBOOK_PDF;
+    document.getElementById("ebook-again").href = pdf;
     document.getElementById("ebook-wa").href = wa(s, t);
     if (im) { var b = document.getElementById("ebook-imovel"); b.href = imovelUrl(im); b.hidden = false; b.textContent = "Ver o " + im.titulo; }
   });

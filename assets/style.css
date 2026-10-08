@@ -201,6 +201,8 @@ h2 { font-size: clamp(2.1rem, 4.2vw, 3.2rem); margin-bottom: 18px; letter-spacin
 .ebook-band h2 { color: #fff; }
 .ebook-band p { color: rgba(255,255,255,.75); margin-bottom: 32px; max-width: 32em; }
 .ebook-band .eyebrow { color: var(--gold-soft); }
+.ebook-band .ebook-also { margin: 20px 0 0; font-size: .9rem; }
+.ebook-band .ebook-also a { color: var(--gold-soft); text-decoration: underline; text-underline-offset: 3px; }
 .cover {
   aspect-ratio: 3 / 4;
   max-width: 300px;
